@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Code Blue PC Repair</title>
+<meta name="description" content="Code Blue PC Repair: appointment-only computer repair in Thousand Oaks, Westlake Village, Camarillo, Simi Valley, Ventura and Calabasas, and Code Blue IT Services for small businesses. Your Tech, Our Expertise.">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..900&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: a glowing patient monitor at night. Deliberately dark-only so the electric blue can glow.
+   Hero with two doors (home / business), a commitments strip, service lanes, business plans,
+   skills, process, FAQ, then intake. */
+:root {
+  --bg: #050b16;           /* monitor black */
+  --bg-2: #081426;         /* raised band */
+  --panel: #0c1a31;
+  --line: #1a3156;
+  --ink: #eaf2ff;
+  --muted: #97abc9;
+  --electric: #2f8cff;     /* code blue, lit */
+  --cyan: #38d9ff;         /* hot edge of the glow */
+  --navy: #1e4d86;         /* logo navy */
+  --glow: rgba(47, 140, 255, 0.55);
+  --glow-soft: rgba(47, 140, 255, 0.16);
+  --display: "Archivo", "Arial Narrow", Arial, sans-serif;
+  --body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 400 1.0625rem/1.6 var(--body); }
+a { color: var(--cyan); }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, summary:focus-visible {
+  outline: 2px solid var(--cyan); outline-offset: 3px;
+}
+img { max-width: 100%; }
+.wrap { width: 100%; max-width: 74rem; margin: 0 auto; padding-inline: 1.25rem; }
+h1, h2, h3 { font-family: var(--display); font-stretch: 78%; line-height: 1.02; text-wrap: balance; margin: 0; }
+h2 { font-size: clamp(2.1rem, 4.8vw, 3.4rem); font-weight: 800; letter-spacing: -0.01em; }
+h3 { font-size: 1.45rem; font-weight: 700; }
+p { margin: 0; }
+.eyebrow { font: 600 0.75rem/1 var(--mono); letter-spacing: 0.16em; text-transform: uppercase; color: var(--cyan); }
+.lit {
+  background: linear-gradient(92deg, var(--electric), var(--cyan) 60%, #9fe9ff);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  filter: drop-shadow(0 0 18px var(--glow));
+}
+
+/* Buttons */
+.btn { display: inline-flex; align-items: center; gap: 0.5rem; font: 600 1rem/1 var(--body); padding: 1rem 1.5rem; border-radius: 999px; text-decoration: none; border: 1px solid transparent; cursor: pointer; transition: transform .15s ease, box-shadow .2s ease; }
+.btn-primary { background: linear-gradient(92deg, var(--electric), #19b4ff); color: #fff; box-shadow: 0 0 0 1px rgba(56,217,255,.35), 0 8px 30px var(--glow); }
+.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 0 0 1px rgba(56,217,255,.6), 0 10px 40px var(--glow); }
+
+/* Top bar */
+.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10; background: rgba(5,11,22,.82); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+.bar .wrap { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-block: 0.55rem; }
+.logo { display: block; flex: none; }
+.logo img { height: 3.25rem; width: auto; max-width: none; filter: drop-shadow(0 0 8px var(--glow)); }
+.nav { display: flex; align-items: center; gap: 1.4rem; flex-wrap: wrap; }
+.nav a { color: var(--muted); text-decoration: none; font-size: 0.92rem; font-weight: 500; }
+.nav a:hover { color: var(--ink); }
+.nav .btn { padding: 0.6rem 1.05rem; font-size: 0.9rem; color: #fff; }
+@media (max-width: 760px) { .nav a:not(.btn) { display: none; } .logo img { height: 2.6rem; } }
+
+/* Hero */
+.hero { position: relative; overflow: hidden; padding-block: 4rem 0; isolation: isolate;
+  background:
+    radial-gradient(60rem 30rem at 85% -10%, rgba(47,140,255,.28), transparent 60%),
+    radial-gradient(40rem 26rem at -10% 110%, rgba(56,217,255,.14), transparent 60%),
+    var(--bg); }
+.hero::before { content: ""; position: absolute; inset: 0; z-index: -1; opacity: .5;
+  background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 48px 48px; mask-image: linear-gradient(180deg, #000 0%, transparent 85%); -webkit-mask-image: linear-gradient(180deg, #000 0%, transparent 85%); }
+.hero .wrap { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.75rem; }
+.hero-logo { display: block; width: min(100%, 36rem); height: auto; filter: drop-shadow(0 0 14px var(--glow)) drop-shadow(0 0 40px rgba(47,140,255,.35)); }
+.hero h1 { font-size: clamp(2.9rem, 8.4vw, 6.4rem); font-weight: 900; font-stretch: 66%; text-transform: uppercase; }
+.hero .lead { max-width: 40rem; font-size: 1.2rem; color: var(--muted); }
+.doors { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr)); gap: 1rem; max-width: 52rem; }
+.door { display: grid; gap: 0.35rem; padding: 1.25rem 1.4rem; border-radius: 14px; text-decoration: none; color: var(--ink);
+  background: linear-gradient(180deg, rgba(20,44,84,.7), rgba(12,26,49,.7)); border: 1px solid var(--line); transition: border-color .2s, box-shadow .2s, transform .15s; }
+.door:hover { border-color: var(--electric); box-shadow: 0 0 0 1px var(--electric), 0 12px 40px var(--glow-soft); transform: translateY(-2px); }
+.door .k { font: 600 0.72rem/1 var(--mono); letter-spacing: 0.14em; text-transform: uppercase; color: var(--cyan); }
+.door b { font: 800 1.6rem/1.05 var(--display); font-stretch: 78%; }
+.door span:last-child { color: var(--muted); font-size: 0.95rem; }
+.trace { display: block; width: 100%; height: 110px; margin-top: 2.5rem; }
+.trace path { fill: none; stroke-width: 3; stroke-linejoin: round; stroke-linecap: round; }
+.trace .base { stroke: rgba(47,140,255,.18); }
+.trace .beam { stroke: url(#beam); stroke-dasharray: 260 2400; stroke-dashoffset: 0; filter: drop-shadow(0 0 6px var(--cyan)) drop-shadow(0 0 16px var(--electric)); }
+@media (prefers-reduced-motion: no-preference) {
+  .trace .beam { animation: sweep 3s linear infinite; }
+  @keyframes sweep { from { stroke-dashoffset: 260; } to { stroke-dashoffset: -2400; } }
+}
+@media (prefers-reduced-motion: reduce) { .trace .beam { stroke-dasharray: none; } }
+
+/* Commitments strip */
+.promise { border-block: 1px solid var(--line); background: var(--bg-2); }
+.promise ul { list-style: none; margin: 0 auto; padding-block: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); }
+.promise li { padding: 1.4rem 1.25rem; display: grid; gap: 0.25rem; border-left: 1px solid var(--line); }
+.promise li:first-child { border-left: 0; }
+.promise b { font: 700 1.15rem/1.2 var(--display); font-stretch: 85%; }
+.promise span { color: var(--muted); font-size: 0.9rem; }
+
+section { padding-block: 5.5rem; }
+.section-head { display: grid; gap: 0.85rem; margin-bottom: 2.75rem; max-width: 46rem; }
+.section-head p { color: var(--muted); }
+
+/* Service lanes */
+.lanes { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); gap: 1.5rem; }
+.lane { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 0 2rem 2rem; display: grid; gap: 1.25rem; align-content: start; min-width: 0; overflow: hidden; transition: border-color .2s, box-shadow .2s; }
+.lane:hover { border-color: rgba(47,140,255,.6); box-shadow: 0 16px 50px var(--glow-soft); }
+.lane-art { display: block; width: calc(100% + 4rem); max-width: none; margin-inline: -2rem; height: auto; aspect-ratio: 2 / 1; border-bottom: 1px solid var(--line); }
+.lane-art .art-beat { filter: drop-shadow(0 0 6px #38d9ff) drop-shadow(0 0 14px #2f8cff); }
+.tag { justify-self: start; font: 600 0.72rem/1 var(--mono); letter-spacing: 0.12em; text-transform: uppercase; padding: 0.45rem 0.7rem; border-radius: 999px; color: var(--cyan); border: 1px solid rgba(56,217,255,.4); background: rgba(56,217,255,.08); }
+.lane ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 0.6rem; }
+.lane li { display: grid; grid-template-columns: 1.1rem 1fr; gap: 0.6rem; }
+.lane li::before { content: ""; width: 8px; height: 8px; margin-top: 0.6rem; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 10px var(--cyan); }
+.lane .note { font-size: 0.92rem; color: var(--muted); border-top: 1px dashed var(--line); padding-top: 1rem; }
+
+/* Business band */
+.biz { background:
+  radial-gradient(50rem 24rem at 100% 0%, rgba(47,140,255,.16), transparent 60%), var(--bg-2);
+  border-block: 1px solid var(--line); }
+.plans { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr)); gap: 1.25rem; }
+.plan { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 1.75rem; display: grid; gap: 0.9rem; align-content: start; }
+.plan.feature { border-color: var(--electric); box-shadow: 0 0 0 1px var(--electric), 0 18px 60px var(--glow-soft); }
+.plan .k { font: 600 0.72rem/1 var(--mono); letter-spacing: 0.14em; text-transform: uppercase; color: var(--cyan); }
+.plan p { color: var(--muted); font-size: 0.95rem; }
+.plan ul { margin: 0; padding-left: 1.1rem; display: grid; gap: 0.35rem; font-size: 0.95rem; }
+.industries { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 2.5rem; }
+.industries span { font-size: 0.9rem; padding: 0.5rem 0.9rem; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); }
+.biz-cta { margin-top: 2.5rem; display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; }
+.biz-cta span { color: var(--muted); font-size: 0.95rem; }
+
+/* Skills */
+.skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 15.5rem), 1fr)); gap: 1rem; }
+.skill { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 1.5rem; display: grid; gap: 0.5rem; align-content: start; }
+.skill .code { font: 600 0.72rem/1 var(--mono); color: var(--cyan); letter-spacing: 0.12em; }
+.skill h3 { font-size: 1.3rem; }
+.skill p { font-size: 0.95rem; color: var(--muted); }
+
+/* Steps: a real sequence */
+.steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr)); gap: 1.5rem; counter-reset: step; }
+.steps li { counter-increment: step; padding-top: 1rem; display: grid; gap: 0.4rem; border-top: 2px solid var(--electric); box-shadow: 0 -8px 20px -14px var(--electric); }
+.steps li::before { content: "STEP " counter(step); font: 600 0.75rem/1 var(--mono); letter-spacing: 0.14em; color: var(--cyan); }
+.steps p { color: var(--muted); font-size: 0.95rem; }
+
+/* FAQ */
+.faq { display: grid; gap: 0.75rem; max-width: 52rem; }
+.faq details { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 1.1rem 1.3rem; }
+.faq details[open] { border-color: rgba(47,140,255,.6); }
+.faq summary { cursor: pointer; font-weight: 600; list-style: none; display: flex; justify-content: space-between; gap: 1rem; }
+.faq summary::after { content: "+"; font: 600 1.2rem/1 var(--mono); color: var(--cyan); }
+.faq details[open] summary::after { content: "\2212"; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq p { color: var(--muted); margin-top: 0.75rem; }
+
+/* Service area */
+.regions { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); gap: 1rem; }
+.region { padding: 1.25rem 1.3rem; border: 1px solid var(--line); border-radius: 14px; background: var(--panel); display: grid; gap: 0.35rem; align-content: start; }
+.region b { font: 700 1.3rem/1.1 var(--display); font-stretch: 80%; display: flex; align-items: center; gap: 0.6rem; }
+.region b::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 10px var(--cyan); flex: none; }
+.region span { color: var(--muted); font-size: 0.9rem; }
+
+/* About */
+.about { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); gap: 2.5rem; align-items: start; }
+.about p + p { margin-top: 1rem; }
+.about .body { color: var(--muted); }
+.facts { margin: 0; border: 1px solid var(--line); border-radius: 14px; background: var(--panel); overflow: hidden; }
+.facts div { display: grid; grid-template-columns: 9rem 1fr; gap: 1rem; padding: 0.9rem 1.2rem; border-top: 1px solid var(--line); }
+.facts div:first-child { border-top: 0; }
+.facts dt { font: 600 0.75rem/1.6 var(--mono); text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); }
+.facts dd { margin: 0; font-weight: 500; min-width: 0; overflow-wrap: anywhere; }
+
+/* Booking */
+.booking { background: radial-gradient(50rem 30rem at 50% 120%, rgba(47,140,255,.25), transparent 65%), var(--bg-2); border-top: 1px solid var(--line); }
+.booking-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); gap: 2.5rem; }
+.contact-list { display: grid; gap: 1.25rem; align-content: start; }
+.contact-list .label { font: 600 0.72rem/1 var(--mono); letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.4rem; }
+.contact-list a, .contact-list .val { color: var(--ink); font: 700 1.6rem/1.1 var(--display); font-stretch: 80%; text-decoration: none; overflow-wrap: anywhere; }
+.contact-list a:hover { color: var(--cyan); }
+form { display: grid; gap: 1rem; background: rgba(12,26,49,.85); border: 1px solid var(--line); border-radius: 16px; padding: 1.5rem; min-width: 0; box-shadow: 0 20px 60px rgba(0,0,0,.35); }
+.who { display: flex; flex-wrap: wrap; gap: 0.5rem; border: 0; padding: 0; margin: 0; }
+.who legend { font-size: 0.85rem; font-weight: 500; color: var(--muted); margin-bottom: 0.5rem; }
+.who label { display: inline-flex; flex-direction: row; align-items: center; gap: 0.5rem; padding: 0.55rem 0.95rem; border: 1px solid var(--line); border-radius: 999px; cursor: pointer; color: var(--ink); }
+.who input { width: auto; accent-color: var(--electric); }
+.who label:has(input:checked) { border-color: var(--electric); box-shadow: 0 0 0 1px var(--electric); }
+.row { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr)); gap: 1rem; }
+label { display: grid; gap: 0.35rem; font-size: 0.85rem; font-weight: 500; color: var(--muted); }
+input, select, textarea { font: 400 1rem/1.4 var(--body); color: var(--ink); background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 0.75rem 0.85rem; width: 100%; }
+input:focus, select:focus, textarea:focus { border-color: var(--electric); }
+textarea { min-height: 7rem; resize: vertical; }
+form .fine { font-size: 0.8rem; color: var(--muted); }
+
+footer { padding-block: 2rem; font-size: 0.85rem; color: var(--muted); border-top: 1px solid var(--line); }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; }
+footer a { color: var(--muted); }
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="Code Blue PC Repair home">
+      <img src="logo-glow.png" alt="Code Blue PC Repair" width="190" height="52">
+    </a>
+    <nav class="nav" aria-label="Main">
+      <a href="#home-repair">Home repair</a>
+      <a href="#business">Business IT</a>
+      <a href="#skills">Skills</a>
+      <a href="#area">Service area</a>
+      <a href="#faq">FAQ</a>
+      <a class="btn btn-primary" href="#book">Book now</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="wrap">
+      <img class="hero-logo" src="logo-glow.png" alt="" width="900" height="247">
+      <p class="eyebrow">Your Tech, Our Expertise</p>
+      <h1 id="hero-title">When your tech flatlines, <span class="lit">call Code Blue.</span></h1>
+      <p class="lead">Appointment-only computer repair for homes, and dependable outsourced IT for small businesses. One skilled technician, start to finish.</p>
+      <div class="doors">
+        <a class="door" href="#home-repair">
+          <span class="k">For your home</span>
+          <b>Book a repair appointment</b>
+          <span>PCs, laptops, Wi-Fi, viruses, upgrades and data recovery.</span>
+        </a>
+        <a class="door" href="#business">
+          <span class="k">For your business</span>
+          <b>Get a free IT assessment</b>
+          <span>Networks, workstations, Microsoft 365, backups and security.</span>
+        </a>
+      </div>
+    </div>
+    <svg class="trace" viewBox="0 0 1200 110" preserveAspectRatio="none" aria-hidden="true">
+      <defs>
+        <linearGradient id="beam" x1="0" x2="1"><stop offset="0" stop-color="#2f8cff"/><stop offset="1" stop-color="#9fe9ff"/></linearGradient>
+      </defs>
+      <path class="base" d="M0 65 H200 l14 -10 l12 10 H290 l10 -50 l14 85 l12 -60 l8 25 H510 l14 -10 l12 10 H600 l10 -50 l14 85 l12 -60 l8 25 H830 l14 -10 l12 10 H920 l10 -50 l14 85 l12 -60 l8 25 H1200"/>
+      <path class="beam" d="M0 65 H200 l14 -10 l12 10 H290 l10 -50 l14 85 l12 -60 l8 25 H510 l14 -10 l12 10 H600 l10 -50 l14 85 l12 -60 l8 25 H830 l14 -10 l12 10 H920 l10 -50 l14 85 l12 -60 l8 25 H1200"/>
+    </svg>
+  </section>
+
+  <div class="promise">
+    <ul class="wrap">
+      <li><b>Appointment only</b><span>Your machine gets full attention. No walk-in queue.</span></li>
+      <li><b>Quote before work</b><span>You approve the cost before anything is fixed.</span></li>
+      <li><b>Plain-language answers</b><span>What broke, why, and how to keep it from happening again.</span></li>
+      <li><b>Same tech every time</b><span>You deal directly with the person doing the work.</span></li>
+    </ul>
+  </div>
+
+  <section id="home-repair" aria-labelledby="services-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Residential</p>
+        <h2 id="services-title">Home computer repair, <span class="lit">by appointment</span></h2>
+        <p>Residential repair is the heart of Code Blue. Book a time and get your computer back to full health.</p>
+      </div>
+      <div class="lanes">
+        <article class="lane">
+          <svg class="lane-art" viewBox="0 0 600 300" role="img" aria-label="Laptop with a heartbeat line on its screen"><defs><pattern id="g1" width="30" height="30" patternUnits="userSpaceOnUse"><path d="M30 0H0V30" fill="none" stroke="#1a3156" stroke-width="1"/></pattern><radialGradient id="r1" cx="50%" cy="50%" r="60%"><stop offset="0" stop-color="#2f8cff" stop-opacity=".35"/><stop offset="1" stop-color="#2f8cff" stop-opacity="0"/></radialGradient></defs><rect width="600" height="300" fill="#081426"/><rect width="600" height="300" fill="url(#g1)"/><rect width="600" height="300" fill="url(#r1)"/><g fill="none" stroke-linejoin="round" stroke-linecap="round"><rect x="170" y="70" width="260" height="160" rx="10" stroke="#2f8cff" stroke-width="4"/><path d="M130 238 H470 l-20 22 H150 Z" stroke="#2f8cff" stroke-width="4"/><path class="art-beat" d="M190 160 H250 l10 -14 l10 14 H290 l10 -50 l14 80 l12 -54 l8 24 H410" stroke="#38d9ff" stroke-width="5"/></g></svg>
+          <span class="tag">Repair &amp; upgrades</span>
+          <h3>Fix it and make it faster</h3>
+          <ul>
+            <li>Slow, frozen, or won't-boot PCs and laptops</li>
+            <li>Virus, malware, and pop-up removal</li>
+            <li>SSD, memory, and graphics card upgrades</li>
+            <li>Screen, keyboard, and battery replacement</li>
+            <li>Tune-ups and cleanup for older computers</li>
+          </ul>
+        </article>
+        <article class="lane">
+          <svg class="lane-art" viewBox="0 0 600 300" role="img" aria-label="Wi-Fi signal above a security shield"><defs><pattern id="g2" width="30" height="30" patternUnits="userSpaceOnUse"><path d="M30 0H0V30" fill="none" stroke="#1a3156" stroke-width="1"/></pattern><radialGradient id="r2" cx="50%" cy="50%" r="60%"><stop offset="0" stop-color="#2f8cff" stop-opacity=".35"/><stop offset="1" stop-color="#2f8cff" stop-opacity="0"/></radialGradient></defs><rect width="600" height="300" fill="#081426"/><rect width="600" height="300" fill="url(#g2)"/><rect width="600" height="300" fill="url(#r2)"/><g fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M190 120 a150 150 0 0 1 220 0" stroke="#2f8cff" stroke-width="5" opacity=".55"/><path d="M225 150 a100 100 0 0 1 150 0" stroke="#2f8cff" stroke-width="5" opacity=".8"/><path d="M300 140 c-30 0 -45 -8 -45 -8 v52 c0 38 45 60 45 60 c0 0 45 -22 45 -60 v-52 c0 0 -15 8 -45 8 z" stroke="#38d9ff" stroke-width="5" class="art-beat"/><path d="M280 190 l14 14 l26 -30" stroke="#38d9ff" stroke-width="5"/></g></svg>
+          <span class="tag">Setup &amp; recovery</span>
+          <h3>Get connected and stay protected</h3>
+          <ul>
+            <li>Data recovery from failing drives</li>
+            <li>Backup setup that actually gets tested</li>
+            <li>Wi-Fi, router, mesh, and printer setup</li>
+            <li>New computer setup and file transfer</li>
+            <li>Parental controls and safe-browsing setup</li>
+          </ul>
+          <p class="note">Every residential job starts with a booked appointment. No walk-ins.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="business" class="biz" aria-labelledby="biz-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Code Blue IT Services &middot; for business</p>
+        <h2 id="biz-title">Your outsourced IT department, <span class="lit">without the payroll</span></h2>
+        <p>Small businesses get the same hands-on skill, scheduled around your hours. Pick the level of help that fits, from a one-time project to ongoing care.</p>
+      </div>
+      <div class="plans">
+        <article class="plan">
+          <span class="k">On call</span>
+          <h3>Break / fix support</h3>
+          <p>Something's down and you need it working today.</p>
+          <ul><li>Priority scheduling for business clients</li><li>On-site or remote troubleshooting</li><li>Billed per visit, no contract</li></ul>
+        </article>
+        <article class="plan feature">
+          <span class="k">Recommended</span>
+          <h3>Scheduled care</h3>
+          <p>Regular visits that stop problems before they start.</p>
+          <ul><li>Monthly or quarterly maintenance visits</li><li>Updates, patching, and backup checks</li><li>Security review and a short written report</li></ul>
+        </article>
+        <article class="plan">
+          <span class="k">Projects</span>
+          <h3>Setup &amp; upgrades</h3>
+          <p>A defined job with a fixed quote.</p>
+          <ul><li>Office network, Wi-Fi, and firewall installs</li><li>Workstation rollouts and migrations</li><li>Microsoft 365 or Google Workspace setup</li></ul>
+        </article>
+      </div>
+      <div class="industries" aria-label="Who I work with">
+        <span>Small offices</span><span>Retail &amp; restaurants</span><span>Professional practices</span><span>Home-based businesses</span><span>Contractors &amp; trades</span><span>Nonprofits</span>
+      </div>
+      <div class="biz-cta">
+        <a class="btn btn-primary" href="#book" data-who="business">Request a free IT assessment</a>
+        <span>A walkthrough of your setup and a written list of what to fix first.</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills" aria-labelledby="skills-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Skill set</p>
+        <h2 id="skills-title">What I bring to the bench</h2>
+      </div>
+      <div class="skills">
+        <div class="skill"><span class="code">HW</span><h3>Hardware diagnostics</h3><p>Component-level troubleshooting and part replacement.</p></div>
+        <div class="skill"><span class="code">OS</span><h3>Windows &amp; macOS</h3><p>Installs, repairs, drivers, user accounts, and migrations.</p></div>
+        <div class="skill"><span class="code">NET</span><h3>Networking</h3><p>Routers, switches, mesh Wi-Fi, VPNs, and cabling for homes and offices.</p></div>
+        <div class="skill"><span class="code">SEC</span><h3>Security</h3><p>Malware cleanup, endpoint protection, and account hardening.</p></div>
+        <div class="skill"><span class="code">DATA</span><h3>Data &amp; backup</h3><p>Recovery from failing drives and backup plans that get tested.</p></div>
+        <div class="skill"><span class="code">CLOUD</span><h3>Cloud &amp; email</h3><p>Microsoft 365, Google Workspace, domains, and business email.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="how-title" style="padding-top: 0">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">How it works</p>
+        <h2 id="how-title">From first message to fixed</h2>
+      </div>
+      <ol class="steps">
+        <li><h3>Request a time</h3><p>Send the form below or call. Tell me what's going on.</p></li>
+        <li><h3>Get a quote</h3><p>I confirm the appointment and give you an idea of cost up front.</p></li>
+        <li><h3>Diagnose &amp; repair</h3><p>I find the cause and explain the fix before doing it.</p></li>
+        <li><h3>Follow up</h3><p>You get a short summary of what was done and what to watch for.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="faq" aria-labelledby="faq-title" style="padding-top: 0">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Questions</p>
+        <h2 id="faq-title">Good to know</h2>
+      </div>
+      <div class="faq">
+        <details><summary>Do you take walk-ins?</summary><p>No. Code Blue works by appointment only, so each repair gets full attention and you aren't left waiting in line.</p></details>
+        <details><summary>Will I know the cost before you start?</summary><p>Yes. After a diagnosis you get a quote, and no repair work starts until you approve it.</p></details>
+        <details><summary>Do you work with businesses?</summary><p>Yes. Code Blue IT Services handles small-business networks, workstations, Microsoft 365, backups, and security, either per visit, on a schedule, or as a fixed-price project.</p></details>
+        <details><summary>Is my data safe with you?</summary><p>Your files stay private. I only access what's needed for the repair, and I'll back up important data before any work that could affect it.</p></details>
+        <details><summary>What areas do you cover?</summary><p>Ventura County and the Conejo Valley, out to Calabasas: Thousand Oaks, Westlake Village, Oak Park, Newbury Park, Camarillo, Moorpark, Simi Valley, Ventura, Oxnard and nearby. Outside that area? Call or text and ask.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section id="area" aria-labelledby="area-title" style="padding-top: 0">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Service area</p>
+        <h2 id="area-title">House calls across <span class="lit">Ventura County</span> and out to Calabasas</h2>
+        <p>Appointments at your home or office anywhere in this area. Not sure if you're covered? Call or text and ask.</p>
+      </div>
+      <div class="regions">
+        <div class="region"><b>Conejo Valley</b><span>Thousand Oaks, Westlake Village, Oak Park, Newbury Park</span></div>
+        <div class="region"><b>Calabasas &amp; Hidden Valley</b><span>Calabasas, Hidden Valley, Agoura area</span></div>
+        <div class="region"><b>East County</b><span>Camarillo, Moorpark, Simi Valley</span></div>
+        <div class="region"><b>Coast</b><span>Ventura, Oxnard, Port Hueneme</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" aria-labelledby="about-title" style="padding-top: 0">
+    <div class="wrap about">
+      <div>
+        <p class="eyebrow">About</p>
+        <h2 id="about-title" style="margin-block: 0.85rem 1.25rem">Every repair treated like an emergency</h2>
+        <div class="body">
+          <p>I'm David Marks, the technician behind Code Blue PC Repair. I started Code Blue to give people honest, skilled computer help without the big-box wait or the upsell.</p>
+          <p>Most of my work is home repair by appointment. Through Code Blue IT Services I also support small businesses that need dependable IT from someone who knows their setup.</p>
+        </div>
+      </div>
+      <dl class="facts">
+        <div><dt>Service area</dt><dd>Ventura County and the Conejo Valley, out to Calabasas</dd></div>
+        <div><dt>Hours</dt><dd>By appointment, Mon&ndash;Sat</dd></div>
+        <div><dt>Residential</dt><dd>Home visits or drop-off by appointment</dd></div>
+        <div><dt>Business</dt><dd>On call, scheduled care, or projects</dd></div>
+        <div><dt>Payment</dt><dd>Cash, card, and digital payments</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section id="book" class="booking" aria-labelledby="book-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Book an appointment</p>
+        <h2 id="book-title">Tell me what's <span class="lit">going on</span></h2>
+        <p>Appointments only. Send a request and I'll get back to you to set a time.</p>
+      </div>
+      <div class="booking-grid">
+        <div class="contact-list">
+          <div><div class="label">Call or text</div><a href="tel:+18056227303">(805) 622-7303</a></div>
+          <div><div class="label">Email</div><a href="mailto:info@codebluepcrepair.com">info@codebluepcrepair.com</a></div>
+          <div><div class="label">Web</div><span class="val">codebluepcrepair.com</span></div>
+        </div>
+        <form id="book-form">
+          <fieldset class="who">
+            <legend>This is for</legend>
+            <label for="w-home"><input type="radio" id="w-home" name="who" value="Home" checked> My home</label>
+            <label for="w-biz"><input type="radio" id="w-biz" name="who" value="Business"> My business</label>
+          </fieldset>
+          <div class="row">
+            <label for="f-name">Name<input id="f-name" name="name" required autocomplete="name"></label>
+            <label for="f-phone">Phone<input id="f-phone" name="phone" type="tel" autocomplete="tel"></label>
+          </div>
+          <div class="row">
+            <label for="f-company">Business name (if any)<input id="f-company" name="company" autocomplete="organization"></label>
+            <label for="f-when">Preferred day / time<input id="f-when" name="when" placeholder="e.g. Saturday morning"></label>
+          </div>
+          <label for="f-msg">What's happening?<textarea id="f-msg" name="message" required placeholder="e.g. Laptop won't turn on after an update"></textarea></label>
+          <button class="btn btn-primary" type="submit">Request appointment</button>
+          <p class="fine">This opens your email app with your request filled in. Prefer the phone? Call or text the number shown.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>&copy; <span id="yr">2026</span> Code Blue PC Repair&reg; &middot; Code Blue IT Services</span>
+    <span>Serving Ventura County and the Conejo Valley</span>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+  document.querySelectorAll('[data-who="business"], .door[href="#business"]').forEach(function (a) {
+    a.addEventListener('click', function () { document.getElementById('w-biz').checked = true; });
+  });
+  document.getElementById('book-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var f = e.target;
+    var who = f.querySelector('input[name="who"]:checked').value;
+    var body = 'For: ' + who + '\nName: ' + f.name.value + '\nPhone: ' + f.phone.value +
+               (f.company.value ? '\nBusiness: ' + f.company.value : '') +
+               '\nPreferred time: ' + f.when.value + '\n\n' + f.message.value;
+    location.href = 'mailto:info@codebluepcrepair.com?subject=' +
+      encodeURIComponent((who === 'Business' ? 'Business IT request' : 'Appointment request') + ' from ' + f.name.value) +
+      '&body=' + encodeURIComponent(body);
+  });
+</script>
+</body>
+</html>
