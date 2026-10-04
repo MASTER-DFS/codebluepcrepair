@@ -59,14 +59,16 @@ p { margin: 0; }
 
 /* Top bar */
 .bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10; background: rgba(5,11,22,.82); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
-.bar .wrap { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-block: 0.55rem; }
+.bar .wrap { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: center; gap: 1rem; padding-block: 0.55rem; }
 .logo { display: block; flex: none; }
 .logo img { height: 3.25rem; width: auto; max-width: none; filter: drop-shadow(0 0 8px var(--glow)); }
 .nav { display: flex; align-items: center; gap: 1.4rem; flex-wrap: wrap; }
+.nav-right { justify-content: flex-end; }
 .nav a { color: var(--muted); text-decoration: none; font-size: 0.92rem; font-weight: 500; }
 .nav a:hover { color: var(--ink); }
 .nav .btn { padding: 0.6rem 1.05rem; font-size: 0.9rem; color: #fff; }
-@media (max-width: 760px) { .nav a:not(.btn) { display: none; } .logo img { height: 2.6rem; } }
+@media (max-width: 1060px) { .nav-left a, .nav-right a:not(.btn) { display: none; } }
+@media (max-width: 760px) { .logo img { height: 2.2rem; } .nav .btn { padding: 0.5rem 0.8rem; font-size: 0.82rem; white-space: nowrap; } }
 
 /* Hero */
 .hero { position: relative; overflow: hidden; padding-block: 4rem 0; isolation: isolate;
@@ -77,11 +79,11 @@ p { margin: 0; }
 .hero::before { content: ""; position: absolute; inset: 0; z-index: -1; opacity: .5;
   background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
   background-size: 48px 48px; mask-image: linear-gradient(180deg, #000 0%, transparent 85%); -webkit-mask-image: linear-gradient(180deg, #000 0%, transparent 85%); }
-.hero .wrap { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.75rem; }
-.hero-logo { display: block; width: min(100%, 36rem); height: auto; filter: drop-shadow(0 0 14px var(--glow)) drop-shadow(0 0 40px rgba(47,140,255,.35)); }
+.hero .wrap { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.75rem; text-align: center; justify-items: center; }
+.hero-logo { display: block; width: min(100%, 36rem); height: auto; margin-inline: auto; filter: drop-shadow(0 0 14px var(--glow)) drop-shadow(0 0 40px rgba(47,140,255,.35)); }
 .hero h1 { font-size: clamp(2.9rem, 8.4vw, 6.4rem); font-weight: 900; font-stretch: 66%; text-transform: uppercase; }
-.hero .lead { max-width: 40rem; font-size: 1.2rem; color: var(--muted); }
-.doors { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr)); gap: 1rem; max-width: 52rem; }
+.hero .lead { max-width: 40rem; margin-inline: auto; font-size: 1.2rem; color: var(--muted); }
+.doors { width: 100%; margin-inline: auto; text-align: left; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr)); gap: 1rem; max-width: 52rem; }
 .door { display: grid; gap: 0.35rem; padding: 1.25rem 1.4rem; border-radius: 14px; text-decoration: none; color: var(--ink);
   background: linear-gradient(180deg, rgba(20,44,84,.7), rgba(12,26,49,.7)); border: 1px solid var(--line); transition: border-color .2s, box-shadow .2s, transform .15s; }
 .door:hover { border-color: var(--electric); box-shadow: 0 0 0 1px var(--electric), 0 12px 40px var(--glow-soft); transform: translateY(-2px); }
@@ -206,13 +208,15 @@ footer a { color: var(--muted); }
 
 <header class="bar">
   <div class="wrap">
-    <a class="logo" href="#top" aria-label="Code Blue PC Repair home">
-      <img src="logo-glow.png" alt="Code Blue PC Repair" width="190" height="52">
-    </a>
-    <nav class="nav" aria-label="Main">
+    <nav class="nav nav-left" aria-label="Main">
       <a href="#home-repair">Home repair</a>
       <a href="#business">Business IT</a>
       <a href="#skills">Skills</a>
+    </nav>
+    <a class="logo" href="#top" aria-label="Code Blue PC Repair home">
+      <img src="logo-glow.png" alt="Code Blue PC Repair" width="190" height="52">
+    </a>
+    <nav class="nav nav-right" aria-label="More">
       <a href="#area">Service area</a>
       <a href="#faq">FAQ</a>
       <a class="btn btn-primary" href="#book">Book now</a>
