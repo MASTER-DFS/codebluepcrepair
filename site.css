@@ -224,6 +224,8 @@ a.lane:hover { border-color: var(--electric); box-shadow: 0 0 0 1px var(--electr
 .facts div:first-child { border-top: 0; }
 .facts dt { font: 600 0.75rem/1.6 var(--mono); text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); }
 .facts dd { margin: 0; font-weight: 500; min-width: 0; overflow-wrap: anywhere; }
+.certs { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.5rem; }
+.cert-code { font: 600 0.72rem/1 var(--mono); color: var(--cyan); letter-spacing: 0.08em; white-space: nowrap; margin-right: 0.45rem; }
 @container (max-width: 30rem) { .facts div { grid-template-columns: 1fr; gap: 0.2rem; } }
 
 /* Booking */
