@@ -113,9 +113,9 @@ p { margin: 0; }
 .trace .base { stroke: rgba(47,140,255,.18); }
 .trace .beam { stroke: url(#beam); stroke-dasharray: 260 2400; stroke-dashoffset: 0; filter: drop-shadow(0 0 6px var(--cyan)) drop-shadow(0 0 16px var(--electric)); }
 @media (prefers-reduced-motion: no-preference) {
-  /* Loops nonstop while on screen; the Pause motion button stops it (motion longer than 5s needs a pause control). */
+  /* Loops nonstop while on screen, with no pause button (David's call). Off screen it rests; reduced motion gets a still line. */
   .trace .beam { animation: sweep 2.4s linear infinite; }
-  .trace.paused .beam, .trace.user-paused .beam { animation-play-state: paused; }
+  .trace.paused .beam { animation-play-state: paused; }
   @keyframes sweep { from { stroke-dashoffset: 260; } to { stroke-dashoffset: -2400; } }
   @keyframes sweep-m { from { stroke-dashoffset: -250; } to { stroke-dashoffset: -1500; } }
   @keyframes sweep-sm { from { stroke-dashoffset: -260; } to { stroke-dashoffset: -1300; } }
@@ -123,8 +123,6 @@ p { margin: 0; }
   @media (max-width: 440px) { .trace .beam { animation: sweep-sm 1.2s linear infinite; } }
 }
 @media (prefers-reduced-motion: reduce) { .trace .beam { stroke-dasharray: none; } }
-.beat-toggle { position: absolute; right: max(1rem, env(safe-area-inset-right)); bottom: 0.6rem; z-index: 1; min-height: 2rem; padding: 0.35rem 0.8rem; border-radius: 999px; border: 1px solid var(--click-line); background: rgba(5,11,22,.75); color: var(--muted); font: 600 0.68rem/1 var(--mono); letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; }
-.beat-toggle:hover { color: var(--ink); border-color: var(--electric); }
 
 /* Commitments strip */
 .promise { border-block: 1px solid var(--line); background: var(--bg-2); }

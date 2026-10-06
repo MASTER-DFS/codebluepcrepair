@@ -11,14 +11,8 @@
     if (e.key === 'Escape' && menu.open) { menu.open = false; menu.querySelector('summary').focus(); }
   });
 
-  // Heartbeat: loops nonstop, but only runs while on screen, and visitors can pause it.
-  var trace = document.querySelector('.trace'), beatBtn = document.querySelector('.beat-toggle');
-  if (trace && beatBtn && window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
-    beatBtn.hidden = false;
-    beatBtn.addEventListener('click', function () {
-      beatBtn.textContent = trace.classList.toggle('user-paused') ? 'Play motion' : 'Pause motion';
-    });
-  }
+  // Heartbeat: loops nonstop, but only runs while on screen.
+  var trace = document.querySelector('.trace');
   if (trace && 'IntersectionObserver' in window) {
     trace.classList.add('paused');
     new IntersectionObserver(function (en) { trace.classList.toggle('paused', !en[0].isIntersecting); }).observe(trace);
