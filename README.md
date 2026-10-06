@@ -2,10 +2,11 @@
 
 Static site for codebluepcrepair.com, hosted free on GitHub Pages.
 
-- `index.html` is the whole site (styles and script are inline).
+- `index.html` is the main page; `home-repair/index.html` and `business-it/index.html` are the two service pages.
+- `site.css` and `site.js` are shared by all three pages.
 - `CNAME` tells GitHub Pages to serve the site at codebluepcrepair.com.
 
-To edit: change text in `index.html`, commit, and push. GitHub Pages republishes automatically.
+To edit: change the page's HTML, commit, and push. GitHub Pages republishes automatically.
 
 ## Do not delete
 
@@ -16,7 +17,10 @@ To edit: change text in `index.html`, commit, and push. GitHub Pages republishes
 
 ## When editing
 
-- FAQ answers live in two places: the visible `#faq` section and the FAQPage JSON-LD in `<head>`. Edit both identically.
+- The header, footer and booking form are repeated on all three pages. Change them on every page.
+- Links between pages and to images and fonts use root-absolute URLs (`/site.css`, `/fonts/...`).
+- The FAQ lives only on the main page, in two places: the visible `#faq` section and the FAQPage JSON-LD in `<head>`. Edit both identically.
+- A bright blue outline (`--click-line`) means "you can click this". Plain cards use `--line`.
 - The self-hosted Archivo font only covers weights 700-900 and widths 66-85%. Using any other weight or width needs a new font file.
-- `404.html` can be served at any path, so its links and assets use root-absolute URLs (`/fonts/...`).
+- `404.html` can be served at any path, so it is self-contained.
 - Update `<lastmod>` in `sitemap.xml` after content changes.
