@@ -217,6 +217,14 @@ a.lane:hover { border-color: var(--electric); box-shadow: 0 0 0 1px var(--electr
 .about h2 { margin-block: 0.85rem 1.25rem; }
 .about p + p { margin-top: 1rem; }
 .about .body { color: var(--muted); }
+/* Privacy page */
+.legal { padding-top: 3.5rem; }
+.legal-body { max-width: 46rem; display: grid; gap: 2.5rem; }
+.legal h2 { font-size: clamp(1.6rem, 3.6vw, 2.2rem); margin-bottom: 0.75rem; }
+.legal p, .legal li { color: var(--muted); }
+.legal p + p { margin-top: 0.85rem; }
+.legal ul { margin: 0.85rem 0 0; padding-left: 1.2rem; display: grid; gap: 0.6rem; }
+.legal strong { color: var(--ink); }
 .facts { margin: 0; border: 1px solid var(--line); border-radius: 14px; background: var(--panel); overflow: hidden; container-type: inline-size; }
 .facts div { display: grid; grid-template-columns: 9rem 1fr; gap: 1rem; padding: 0.9rem 1.2rem; border-top: 1px solid var(--line); }
 .facts div:first-child { border-top: 0; }
